@@ -20,9 +20,7 @@ export const Q_COLLECTION_BY_HANDLE = `
           availableForSale
           featuredImage { url altText }
           priceRange { minVariantPrice { amount currencyCode } }
-          variants(first: 1) {
-            nodes { id title availableForSale }
-          }
+          variants(first: 1) { nodes { id title availableForSale } }
         }
       }
     }
@@ -37,19 +35,6 @@ export const M_CART_CREATE = `
         checkoutUrl
         totalQuantity
         cost { totalAmount { amount currencyCode } }
-        lines(first: 50) {
-          nodes {
-            id
-            quantity
-            merchandise {
-              ... on ProductVariant {
-                id
-                title
-                product { title }
-              }
-            }
-          }
-        }
       }
       userErrors { field message }
     }
@@ -64,19 +49,6 @@ export const M_CART_LINES_ADD = `
         checkoutUrl
         totalQuantity
         cost { totalAmount { amount currencyCode } }
-        lines(first: 50) {
-          nodes {
-            id
-            quantity
-            merchandise {
-              ... on ProductVariant {
-                id
-                title
-                product { title }
-              }
-            }
-          }
-        }
       }
       userErrors { field message }
     }

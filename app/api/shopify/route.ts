@@ -2,10 +2,7 @@ import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 
-type Body = {
-  query: string;
-  variables?: Record<string, any>;
-};
+type Body = { query: string; variables?: Record<string, any> };
 
 function requiredEnv(name: string): string {
   const v = process.env[name];
@@ -24,7 +21,6 @@ export async function POST(req: Request) {
     const domain = requiredEnv("SHOPIFY_DOMAIN");
     const token = requiredEnv("SHOPIFY_STOREFRONT_TOKEN");
     const apiVersion = process.env.SHOPIFY_API_VERSION || "2025-10";
-
     const endpoint = `https://${domain}/api/${apiVersion}/graphql.json`;
 
     const res = await fetch(endpoint, {
@@ -48,9 +44,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json(json);
   } catch (err: any) {
-    return NextResponse.json(
-      { error: err?.message || "Unknown error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: err?.message || "Unknown error" }, { status: 500 });
   }
 }
